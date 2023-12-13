@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
 
-export default function App() {
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AuthScreen from './AuthScreen'; // Import your authentication screen
+import QuestionScreen from './QuestionScreen'; // Import your screen for answering questions
+import CompletedTestScreen from './CompletedTestScreen'; // Import your screen for viewing completed test
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* Screen for user authentication */}
+        <Stack.Screen name="Auth" component={AuthScreen} options={{ title: 'Login/Signup' }} />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+        {/* Screen for selecting and answering questions */}
+        <Stack.Screen name="Questions" component={QuestionScreen} options={{ title: 'Answer Questions' }} />
+
+        {/* Screen for viewing completed test */}
+        <Stack.Screen name="CompletedTest" component={CompletedTestScreen} options={{ title: 'Completed Test' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
